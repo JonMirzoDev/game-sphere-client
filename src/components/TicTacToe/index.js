@@ -1,26 +1,22 @@
-// src/components/TicTacToe.js
-import React, { useState, useEffect } from 'react'
-import socket from '../../socket'
+import React from 'react'
+import styles from './style.module.scss'
+import Paper from '@mui/material/Paper'
 
-const TicTacToe = ({ sessionId }) => {
-  const [board, setBoard] = useState(Array(9).fill(null))
-  // Additional state like currentPlayer, winner, etc.
-
-  useEffect(() => {
-    socket.on('gameState', (gameState) => {
-      // Update the game state based on server message
-    })
-
-    return () => {
-      socket.off('gameState')
-    }
-  }, [sessionId])
-
-  const handleCellClick = (index) => {
-    // Logic to handle cell click and send move to server
-  }
-
-  // Render the Tic-Tac-Toe board
+const TicTacToeBoard = ({ board, onCellClick }) => {
+  return (
+    <Paper elevation={3} className={styles.ticTacToeBoard}>
+      {board &&
+        board.map((cell, index) => (
+          <div
+            key={index}
+            className={styles.cell}
+            onClick={() => onCellClick(index)}
+          >
+            {cell}
+          </div>
+        ))}
+    </Paper>
+  )
 }
 
-export default TicTacToe
+export default TicTacToeBoard

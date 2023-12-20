@@ -1,0 +1,18 @@
+.ticTacToeBoard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  max-width: 300px;
+  margin: auto;
+
+  .cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+}

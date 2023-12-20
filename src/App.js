@@ -1,10 +1,15 @@
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import GameLobby from './components/GameLobby'
 import TicTacToe from './components/TicTacToe'
+import HomePage from './pages/HomePage'
 
 const router = createBrowserRouter([
   {
     path: '/',
+    element: <HomePage />
+  },
+  {
+    path: '/lobby/:gameType',
     element: <GameLobby />
   },
   {
