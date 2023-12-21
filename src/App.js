@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     element: <GameLobby />
   },
   {
-    path: '/tic-tac-toe/:id',
+    path: '/tic-tac-toe/:sessionId/:playerId',
     element: <TicTacToe />
   },
   {

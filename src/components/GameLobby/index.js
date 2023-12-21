@@ -6,11 +6,13 @@ import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import { useParams } from 'react-router-dom'
 import socket from '../../socket'
+import { getPlayerId } from '../../utils'
 
 const GameLobby = () => {
   const { gameType } = useParams()
   const [sessions, setSessions] = useState([])
   const navigate = useNavigate()
+  const playerId = getPlayerId()
 
   useEffect(() => {
     socket.emit('requestSessions', { gameType })
@@ -25,15 +27,15 @@ const GameLobby = () => {
   }, [gameType])
 
   const onJoinSession = (sessionId) => {
-    navigate(`/${gameType}/${sessionId}`)
+    navigate(`/${gameType}/${sessionId}/${playerId}`)
   }
 
   return (
     <div className={styles.gameLobby}>
       <Typography variant='h4' gutterBottom>
-        {gameType} Lobby
+        {(gameType).toUpperCase()} Lobby
       </Typography>
-      {sessions.length ? (
+      {sessions.length > 0 ? (
         sessions.map((session) => (
           <Card
             key={session.id}
