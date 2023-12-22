@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Card, CardContent, Typography } from '@mui/material'
 import styles from './style.module.scss'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
-import { useParams } from 'react-router-dom'
 import socket from '../../socket'
 import { getPlayerId } from '../../utils'
 
@@ -33,7 +30,7 @@ const GameLobby = () => {
   return (
     <div className={styles.gameLobby}>
       <Typography variant='h4' gutterBottom>
-        {(gameType).toUpperCase()} Lobby
+        {gameType.toUpperCase()} Lobby
       </Typography>
       {sessions.length > 0 ? (
         sessions.map((session) => (
@@ -43,7 +40,9 @@ const GameLobby = () => {
             onClick={() => onJoinSession(session.id)}
           >
             <CardContent>
-              <Typography variant='h5'>{session.gameType}</Typography>
+              <Typography variant='h5'>
+                {session.gameType.toUpperCase()}
+              </Typography>
               <Typography color='textSecondary'>
                 Players: {session.players.length}/2
               </Typography>
