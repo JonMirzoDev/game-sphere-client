@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Card, CardContent, Typography } from '@mui/material'
+import { Card, CardContent, Typography, CircularProgress } from '@mui/material'
 import styles from './style.module.scss'
 import socket from '../../socket'
 import { getPlayerId } from '../../utils'
@@ -8,6 +8,7 @@ import { getPlayerId } from '../../utils'
 const GameLobby = () => {
   const { gameType } = useParams()
   const [sessions, setSessions] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
   const navigate = useNavigate()
   const playerId = getPlayerId()
 
@@ -16,6 +17,7 @@ const GameLobby = () => {
 
     socket.on('availableGames', (games) => {
       setSessions(games.filter((game) => game.gameType === gameType))
+      setIsLoading(false)
     })
 
     return () => {
@@ -32,7 +34,9 @@ const GameLobby = () => {
       <Typography variant='h4' gutterBottom>
         {gameType.toUpperCase()} Lobby
       </Typography>
-      {sessions.length > 0 ? (
+      {isLoading ? (
+        <CircularProgress />
+      ) : sessions.length > 0 ? (
         sessions.map((session) => (
           <Card
             key={session.id}
