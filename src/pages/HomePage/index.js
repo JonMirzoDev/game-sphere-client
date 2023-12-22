@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, Container, Typography, Box, Paper } from '@mui/material'
+import { Button, Container, Typography, Box, Paper, Stack } from '@mui/material'
 import styles from './style.module.scss'
 
 const HomePage = () => {
@@ -19,19 +19,24 @@ const HomePage = () => {
         <Typography variant='subtitle1' gutterBottom>
           Please select a game to play:
         </Typography>
-        <Box mt={3}>
+        <Stack mt={3} direction='column' spacing={2} alignItems='center'>
           <Button
             variant='contained'
             color='primary'
-            size='large'
             onClick={() => handleGameSelect('tic-tac-toe')}
             className={styles.gameButton}
           >
             Play Tic-Tac-Toe
           </Button>
-          {/* Placeholder for other game buttons */}
-          {/* You can add more games and buttons here */}
-        </Box>
+          <Button
+            variant='contained'
+            color='secondary'
+            onClick={() => handleGameSelect('connect-four')}
+            className={styles.gameButton}
+          >
+            Play Connect Four
+          </Button>
+        </Stack>
       </Box>
     </Container>
   )

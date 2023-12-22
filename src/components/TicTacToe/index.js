@@ -62,7 +62,7 @@ const TicTacToe = () => {
     })
   }
 
-  const handleGoBack = () => {
+  const handleNewGame = () => {
     navigate('/')
   }
 
@@ -71,6 +71,20 @@ const TicTacToe = () => {
       <Typography variant='h2' gutterBottom>
         Tic-Tac-Toe
       </Typography>
+      <Typography variant='h5' mb={2} align='center' gutterBottom>
+        Current Player:{' '}
+        {playerSymbol === currentPlayer ? 'Your turn' : "Opponent's turn"}
+      </Typography>
+      {draw && (
+        <Typography variant='h6' mb={3} align='center'>
+          It's a draw!
+        </Typography>
+      )}
+      {winner && (
+        <Typography variant='h6' mb={3} align='center'>
+          Winner: {winner === playerSymbol ? 'You win!' : 'Opponent wins!'}
+        </Typography>
+      )}
       <Grid container spacing={2} className={styles.board}>
         {board.map((cell, index) => (
           <Grid item xs={4} key={index}>
@@ -78,31 +92,20 @@ const TicTacToe = () => {
               variant='outlined'
               className={styles.cell}
               onClick={() => handleCellClick(index)}
-              disabled={currentPlayer !== playerSymbol}
-              fullWidth
+              disabled={currentPlayer !== playerSymbol || winner || draw}
             >
               {cell || '-'}
             </Button>
           </Grid>
         ))}
       </Grid>
-      {draw && (
-        <Typography variant='h4' mt={4}>
-          It's a draw!
-        </Typography>
-      )}
-      {winner && (
-        <Typography variant='h4' mt={4}>
-          The winner is {winner}
-        </Typography>
-      )}
       <Button
         variant='contained'
         color='primary'
-        onClick={handleGoBack}
-        className={styles.goBackButton}
+        onClick={handleNewGame}
+        className={styles.newGameButton}
       >
-        Go Back to Main Page
+        New Game
       </Button>
     </Paper>
   )
